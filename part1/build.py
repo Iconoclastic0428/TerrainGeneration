@@ -6,7 +6,7 @@ import platform
 COMPILER="g++ -std=c++17"   # The compiler we want to use 
                                 #(You may try g++ if you have trouble)
 SOURCE="./src/*.cpp"    # Where the source code lives
-EXECUTABLE="project"        # Name of the final executable
+EXECUTABLE="lab"        # Name of the final executable
 # ======================= COMMON CONFIGURATION OPTIONS ======================= #
 
 # (2)=================== Platform specific configuration ===================== #
@@ -27,7 +27,7 @@ elif platform.system()=="Windows":
     COMPILER="g++ -std=c++17" # Note we use g++ here as it is more likely what you have
     ARGUMENTS="-D MINGW -std=c++17 -static-libgcc -static-libstdc++" 
     INCLUDE_DIR="-I./include/ -I./../common/thirdparty/old/glm/"
-    EXECUTABLE="project.exe"
+    EXECUTABLE="lab.exe"
     LIBRARIES="-lmingw32 -lSDL2main -lSDL2 -mwindows"
 # (2)=================== Platform specific configuration ===================== #
 
@@ -54,4 +54,5 @@ os.system(compileString)
 # 3.)   Feel free to implement your own make files or autogenerate it from this
 #       script
 # 4.)   It is handy to know Python
+
 

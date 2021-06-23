@@ -1,128 +1,188 @@
-# Final Project - Computer Graphics
+# Lab 11 - Framebuffer Objects
 
-<img src="./media/header.jpg">
+<img align="right" src="./media/fbo.JPG" width="300px" alt="picture">
 
-## Description
+> "Back to rendering a single quad!"
 
-An important part of any computer graphics course, in my opinion, is having the opportunity to build a project that you care about. The final project in this course showcases your creativity from what you have learned over the semester and can be used as a portfolio piece for future internship, co-op, and full-time job opportunities.  We have covered enough computer graphics now that you are ready to design and create a project from scratch.
-  
-## Expectations
+**Lab materials must be pushed to your repository one week from now before the next class begins**
 
-You can work on any idea you want that is within the scope of graphics (OpenGL, WebGL, Vulkan, DirectX, etc.). You may explore areas that we did not cover heavily in class (Animation, particles, different rendering techniques, advanced shaders, image processing, volume rendering, etc.).  Your final project should be on the order of the difficulty beyond the homeworks.  
-## Project Ideas
+**Read:** *Labs are designed to be finished in class if you work diligently, but expected to take 1-2 hours outside of class. They are often more 'tutorial' in style, and sometimes the solution may even be provided in pieces for you to type in and experiment. Copying & Pasting is discouraged however--make mistakes, play, and you will further learn the material.*
 
-I am going to list a few project ideas that I think are within the scope of this class.
+# Logistics
 
-* Procedural generation
-  * Terrain rendering [https://www.youtube.com/watch?v=QjTPIbJNO6I]
-  * City [https://www.youtube.com/watch?v=-d2-PtK4F6Y]
-  * Continuous LOD [https://www.youtube.com/watch?v=DUxAyfuJULc]
-* Rendering 
-  * Photon maps [https://www.youtube.com/watch?v=GckOkpeJ3BY]
-  * Radiosity [https://www.youtube.com/watch?v=8i2M255Zw9I]
-* Constructive Solid Geometry
-  * [https://www.youtube.com/watch?v=-nWPZgxYW-k]
-* Build out or extend ray tracer(Our final homework in some iterations of the course): [https://www.youtube.com/watch?v=ijqaBhyXN98]
-  * Depth of field
-  * Motion blur
-* Modeling
-  * Progressive Mesh https://www.youtube.com/watch?v=CcomX9UQO1w
-  * Subdivision of surfaces [https://www.youtube.com/watch?v=g1M2y1bZOPw]
-  * Or the opposite decimation (mesh simplification) [https://www.youtube.com/watch?v=AvSgHhA9yP4]
-  * Deformable mesh [https://www.youtube.com/watch?v=r_rkSi8VZj0]
-* Volume rendering
-  * Example [https://www.youtube.com/watch?v=nmdlGlJ-2G0]
-* Animation
-  * Flocking behavior [https://www.youtube.com/watch?v=1svKGmGCdXk]
-  * Inverse kinematics [https://www.youtube.com/watch?v=uN_pR9fH-WY]
-  * Physics-based simulation (e.g. pinball)
-  * Collision detection [https://www.youtube.com/watch?v=ZU5PKXxTv8k]
-* Particle Simulation [https://www.youtube.com/watch?v=RMfsdUKEmDo]
-* Games
-  * Build a little First person perspective(shooter, advenutre, etc.) or other interactive environment
-  * Racing game [https://www.youtube.com/watch?v=SVzFWnadOdY]
-* Shaders
-  * Create a world with many different shaders
-    * Cel / Toon shaders [https://www.youtube.com/watch?v=RWTQuvXm2HU]
-    * Bump / Normal / Parallax / Relief mapping [Example]
-  * Deferred rendering [https://www.youtube.com/watch?v=HIrq4sF5QO8]
+You will be working on your own laptop today.
 
-### Assignment strategy
+# Resources to help
 
-My suggested strategy for this project is to:
+- C++ Related
+    - [learncpp.com](https://www.learncpp.com/)
+		- Handy page for learning C++
+    - [cpluscplus.com](http://www.cplusplus.com/)
+		- Another handy page for learning C++. I particularly like the references as well, which show how to use much of the standard library.
+- SDL Related
+	- [Lazy Foo SDL Tutorials](http://lazyfoo.net/tutorials/SDL/)
+		- This is the page where I learned how to setup SDL. Part of this lab is inspired by this websites tutorial.
+	- [SDL API Wiki](https://wiki.libsdl.org/CategoryAPI)
+		- Useful guide to all things SDL2
+- OpenGL Related
+	- [Learn OpenGL](https://learnopengl.com) 
+		- Helpful webpage with many useful tutorials
+	- [Docs.gl](http://docs.gl/)
+		- Very useful webpage for searching for what exactly OpenGL is doing.
+- Lab related 
+	- https://learnopengl.com/Advanced-OpenGL/Framebuffers
+		- Specific resource on rendering framebuffers
+	- https://www.opengl.org/discussion_boards/showthread.php/183185-Multiple-FBOs-or-attachment-swapping
+		- Information on multiple Framebuffer objects
+	- http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-14-render-to-texture/
+		- Another tutorial with cool framebuffer object post-processing effects
+	- https://www.haroldserrano.com/blog/understanding-opengl-objects
+		- A nice refresher on OpenGL Objects: 
 
-* You will have plenty of time to think about the project you want to deliver, but get started early.
-* I recommend finding at least one web tutorial, youtube talk, etc. that can serve as a reference for you to fall back on.
-* You can get feedback from me ahead of time on nearly any graphics related topic, do so!
-* Find your teammates(teams of up to 2) early if you choose to work in a team!
-  * Piazza is a good resource, and I will tentatively match folks on a spreadsheet if requested.
-  
-### How to run your final project
+# Description
 
-Use a [build.py](./build.py). You can modify [build.py](./build.py) to your needs, but I should be able to type `python3 build.py` and then run the generated executable. I plan to spend 0 time figuring out what dependencies to download. If there is some setup extraneous setup needed to run your project, we should arrange to demonstrate your project during office hours. 
+Last lab we created a nice landscape using heightmaps.
 
-Pretend you are deploying this software to someone who has no idea what your code does and needs to be able to run it. The only assumption you should make is the user has SDL2 setup and perhaps a web browser. Logistically, using the [build.py](./build.py) that we have used in this course makes it possible for myself and the course staff to run and debug your project.
+- We learned about heightfields (i.e. heightmaps) which is when we use image data used to represent the 'y' height of each vertex in a terrain.
+- We learned about drawing a triangle strip as a grid and lay a texture over it. 
 
-### Video Deliverable
+Today we are going to redraw the scene and apply post-processing effects to our scene using a framebuffer object.
 
-For this project, you need to make a video recording of your project. Here are the specifications:
+## Part 1 - C++/glsl Refresh?
 
-- Give an 2-3 minute overview of your implementation as a youtube video.
-- Explain what your project is (i.e. You should be talking in your video as you show things)
-- Show what was achieved (e.g. moving a camera around and talking over) 
-- In the video highlight **one** particular technical achievement.
-  - e.g. Part of the code or algorithm that does something neat or was difficult to get right.
-    - Give a quick 'tutorial' like summary of how you solved the problem.
-    - You can talk about other important features in your project, but dedicate some time on one specific item.
-    
-Videos may publicly be uploaded to the course websites 'hall of fame'--please keep the links up!
 
-#### Sample Video Deliverable
+### Task 1 - Composition in C++
 
-Here are some samples from previous years and what I like about it:
+Today we are introducing the 'Framebuffer' class. If you remember previously, we discussed in our C++ refresh the idea of inheritance where one class builds off of another. We call this a 'is-a' relationship, because one class 'is a' descencdent of another, or can act as another class.
 
-- Terrain: https://youtu.be/cGB8C6IT8eE
-  - I like this sample because:
-    - I can hear the speakers voice.
-    - The talk is well outlined and concise.
-    - The speaker shows off the technical parts of the code well.
-    - The speaker shows the actual visuals and uses a high resolution video.
-    - It is not a very long video with lots of silence or 'umms'
-    - If I were to see this on a resume, I would have a very good idea of what the developer knows.
-- (Summer 20) Breakout: https://www.youtube.com/watch?v=IV4EvMX9Lw8&feature=youtu.be
-  - I like this sample because:
-    - I can again hear the speakers voice very clearly.
-    - There are additions beyond what the tutorial provides showing creativity, and pushing the envelope.
-    - The presentations highlights very clearly the graphics effects being talked about.
-    - The technical portions are broken into small pieces, thus making it possible for someone to learn from. They are teaching as they are presenting their project which is absolutely wonderful.
- - (Fall 20) Deferred Rendering: https://www.youtube.com/watch?v=S-fF5R1jeBc
-  - I like this project because this student took a large risk in the implementation.
-    - They did a great implementation and conveyed their passion.
-    - They conveyed enough passion throughout the entire semester, did something very difficult, that I forgave them for having a very loud fan in their video.
-      - They should probably do another recording for their portfolio however.
-      - They spent most of the video 'teaching' so I forgave them for going over the recommended 3 minute limit.
-  - (Fall 20) 3D Sine Wave Visualier: https://www.youtube.com/watch?v=Cu3k_METjzA
-    - Excellent job teaching in this presentation.
-    - May have liked to see the visualization earlier to *sell me* as a viewer, but otherwise speaker did a great and clear presentation.
+Another way to build relationships between classes is what is known as a 'has-a` relationship. This is the idea that a member variable is another instance of a class. In this way we can also compose a more complex class with many instances of other objects.
 
+```cpp
+class FrameBuffer{
+// ...
+// ...
+// ...
+private:
+	Shader* m_shader; // A FrameBuffer 'has-a' Shader.
+};
+
+```
+
+## Part 1 - Post-processing
+
+Today the trick is that we are adding a framebuffer to our renderer. We are going to be drawing to our custom framebuffer, as opposed to using the default OpenGL colorbuffer. By drawing to this framebuffer, we then have the ability to change what the final output of the scene is.
+
+So the steps are:
+
+1. We setup our framebuffer
+2. We draw our scene as normal (using our objects, any shaders, etc.), but direct the output to our framebuffer
+3. Then we bind to a new shader([./shaders/fboVert.glsl](./shaders/fboVert.glsl) and [./shaders/fboVert.glsl](./shaders/fboVert.glsl)) which will be used to draw our next object.
+	- The next object we are drawing is a 'quad'
+	- We will then texture this quad with the framebuffer from step 2.
+
+Since we are drawing to the framebuffer, this buffer stores all of our pixels. We can then manipulate the pixels stored in a texture within our  fragment shader to create a post processing effect.
+
+**Lab Goal:** Render the terrain as normal, but apply a post-processing 'kernel'. https://learnopengl.com/Advanced-OpenGL/Framebuffers provides some samples of how to post-process the final scene by inverting the image, blurring the image, or otherwise performing edge detection.
+
+### Vertex Shader in a glance
+
+This is what is given today.
+
+```c
+// ==================================================================
+#version 330 core
+// Read in our attributes stored from our vertex buffer object
+// We explicitly state which is the vertex information
+// (The first 3 floats are positional data, we are putting in our vector)
+layout(location=0)in vec3 position; 
+layout(location=1)in vec2 texCoord; // Our second attribute - texture coordinates.
+
+// If we have texture coordinates we can now use this as well
+out vec2 v_texCoord;
+
+
+void main()
+{
+
+    gl_Position = vec4(position.x,position.y,0.0f, 1.0f);
+
+    // Store the texture coordinaets which we will output to
+    // the next stage in the graphics pipeline.
+    v_texCoord = texCoord;
+}
+// ==================================================================
+
+```
+
+### Fragment Shader in a glance
+
+This is what is given today.
+
+```c
+// ====================================================
+#version 330 core
+
+// ======================= uniform ====================
+// If we have texture coordinates, they are stored in this sampler.
+uniform sampler2D u_DiffuseMap; 
+
+// ======================= IN =========================
+in vec2 v_texCoord; // Import our texture coordinates from vertex shader
+
+// ======================= out ========================
+// The final output color of each 'fragment' from our fragment shader.
+out vec4 FragColor;
+
+void main()
+{
+    // Store our final texture color
+    vec3 diffuseColor;
+    diffuseColor = texture(u_DiffuseMap, v_texCoord).rgb;
+        
+    FragColor = vec4(diffuseColor,1.0);
+}
+// ==================================================================
+```
+
+## Interaction
+
+In order to prove that the scene is being drawn to a texture and then rendered on a quad, you can hold the <kbd>w</kbd> key to see the wireframe view of the scene.
+
+
+# Submission/Deliverables
+
+### Submission
+
+- Commit all of your files to github, including any additional files you create.
+- Do not commit any binary files unless told to do so.
+- Do not commit any 'data' files generated when executing a binary.
 
 ### Deliverables
 
-* You need to commit your code to this repository.
-* Your program needs to compile using a build.py script (Unless it is a webgl project).
-* Put a link to a youtube/vimeo video in this README.md.
+1. Create one post-processing effect. Some samples are provided at: https://learnopengl.com/Advanced-OpenGL/Framebuffers
 
+# Rubric
 
-## More Resources
+You (and any partner(s)) will receive the same grade from a scale of 0-2.
 
-* N/A
+- 0 for no work completed by the deadline
+- 1 for some work completed, but something is not working properly
+- 2 for a completed lab (with possible 'going further' options completed)
 
-## Other FAQ
+# Going Further
 
-- Q: May I upload my final project to a public repository after the semester is over?
-- A: Yes under the following conditions
-  - You acknowledge your team members and any third parties fairly for their contributions.
-  - You remove the README.md provided with the assignment (delete it entirely from your github history), as you'll want your own readme anyway.
-- Q: May I have a team of 3 or 4--I really want 3 or 4 team members?
-- A: No. I recommend a team size of 1-2. This project can be completed as a 1 person project. I **strongly** recommend using this project as a portfolio piece and treating it as such if you were to apply for a software or graphics engineering position.
+What is that, you finished Early? Did you enjoy this lab? Here are some (optional) ways to further this assignment.
 
+- Create a second framebuffer with a second set of shaders, such that pressing the '1' and '2' numbers flips between the different effects in your scene.
+	- Note, you can implement this with one framebuffer, and have user input passed in through a uniform variable.
+
+# F.A.Q. (Instructor Anticipated Questions)
+
+1. N/A
+
+# Found a bug?
+
+If you found a mistake (big or small, including spelling mistakes) in this lab, kindly send me an e-mail. It is not seen as nitpicky, but appreciated! (Or rather, future generations of students will appreciate it!)
+
+- Fun fact: The famous computer scientist Donald Knuth would pay folks one $2.56 for errors in his published works. [[source](https://en.wikipedia.org/wiki/Knuth_reward_check)]
+- Unfortunately, there is no monetary reward in this course :)
