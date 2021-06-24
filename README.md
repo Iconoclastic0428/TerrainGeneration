@@ -1,8 +1,11 @@
 ## Edit this line: Put your link to your youtube video here (see deliverables).
 
 ## Pictures
-![plot] (./pic/pic1.png)  
-![plot] (./pic/pic2.png)
+<p align="center">
+  <img src="./pic/pic1.png" width="350" title="at width = 0.0011">
+  <img src="./pic/pic2.png" width="350" title="at width = 0.005">
+</p>
+
 
 * Name and partners name(At most teams of 2 folks total)
   * Team member: Shengqi Li
