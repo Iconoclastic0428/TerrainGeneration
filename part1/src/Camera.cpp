@@ -3,18 +3,19 @@
 #include "glm/gtx/transform.hpp"
 
 #include <iostream>
+#include <cmath>
 
 void Camera::MouseLook(int mouseX, int mouseY){
-    // Record our new position as a vector
-    glm::vec2 newMousePosition(mouseX, mouseY);
-    // Detect how much the mouse has moved since
-    // the last time
-    glm::vec2 mouseDelta = 0.01f*(newMousePosition-m_oldMousePosition);
-
-    m_viewDirection = glm::mat3(glm::rotate(-mouseDelta.x, m_upVector)) * m_viewDirection;
-    
-    // Update our old position after we have made changes 
-    m_oldMousePosition = newMousePosition;
+	if(firstMouse){
+		m_oldMousePosition.x = mouseX;
+		m_oldMousePosition.y = mouseY;
+		firstMouse = false;
+	}
+	m_viewDirection.x += (mouseX - m_oldMousePosition.x) / 100.0f;
+	m_viewDirection.y += (m_oldMousePosition.y - mouseY) / 100.0f;
+	m_oldMousePosition.x = mouseX;
+	m_oldMousePosition.y = mouseY;
+	norm = std::sqrt(std::pow(m_viewDirection.x, 2) + std::pow(m_viewDirection.z, 2));
 }
 
 // OPTIONAL TODO: 
@@ -23,19 +24,23 @@ void Camera::MouseLook(int mouseX, int mouseY){
 //               Think about how you can do this for a better camera!
 
 void Camera::MoveForward(float speed){
-    m_eyePosition.z -= speed;
+    m_eyePosition.z += m_viewDirection.z * speed / norm;
+    m_eyePosition.x += m_viewDirection.x * speed / norm;
 }
 
 void Camera::MoveBackward(float speed){
-    m_eyePosition.z += speed;
+    m_eyePosition.z -= m_viewDirection.z * speed / norm;
+    m_eyePosition.x -= m_viewDirection.x * speed / norm;
 }
 
 void Camera::MoveLeft(float speed){
-    m_eyePosition.x -= speed;
+    m_eyePosition.z -= m_viewDirection.x * speed / norm;
+    m_eyePosition.x += m_viewDirection.z * speed / norm;
 }
 
 void Camera::MoveRight(float speed){
-    m_eyePosition.x += speed;
+    m_eyePosition.z += m_viewDirection.x * speed / norm;
+    m_eyePosition.x -= m_viewDirection.z * speed / norm;
 }
 
 void Camera::MoveUp(float speed){

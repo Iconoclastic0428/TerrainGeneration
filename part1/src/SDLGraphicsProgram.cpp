@@ -164,7 +164,7 @@ void SDLGraphicsProgram::Loop(){
                 // Handle mouse movements
                 int mouseX = e.motion.x;
                 int mouseY = e.motion.y;
-//              m_renderer->camera->mouseLook(mouseX, mouseY);
+                m_renderer->GetCamera(0)->MouseLook(mouseX, mouseY);
             }
             switch(e.type){
                 // Handle keyboard presses

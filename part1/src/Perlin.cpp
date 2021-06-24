@@ -180,7 +180,12 @@ void Perlin::output(){
       map << 118 << std::endl;
       map << 83 << std::endl;
     }
-    else{
+    else if(i > 140 && i <= 150){
+      map << 98 << std::endl;
+      map << 210 << std::endl;
+      map << 99 << std::endl;
+    }
+    else if(i > 150){
       map << 255 << std::endl;
       map << 255 << std::endl;
       map << 255 << std::endl;

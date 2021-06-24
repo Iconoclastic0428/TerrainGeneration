@@ -1,21 +1,17 @@
-*TODO*: Please edit the following information in your final project
-
 ## Edit this line: Put your link to your youtube video here (see deliverables).
 
-## Edit this line: Put a few screenshots of your project here (see deliverables).
-
+## Pictures
+![alt text] ./pic/pic1.png
+![alt text] ./pic/pic2.png
 
 * Name and partners name(At most teams of 2 folks total)
-  * Team member 1: *edit this*
-  * Team member 2: *edit this*
-* How many hours did it take you to complete this final project? 
-* Did you collaborate or share ideas with any other students/TAs/Professors?
+  * Team member: Shengqi Li
+* How many hours did it take you to complete this final project? 40
+* Did you collaborate or share ideas with any other students/TAs/Professors? No
 * Did you use any external resources? 
   * Note it is fair to utilize some tutorials--cite them here. You **must** add your own personal touch however!
-  * *edit this*
-  * *edit this*
-  * *edit this*
-  * (Optional) What was the most interesting part of the Final Assignment? How could the instructor improve the final project?
+  * Perlin K. "Improving Noise." Proceedings of the 29th annual conference on Computer graphics and interactive techniques. 2002.
+  * https://blog.csdn.net/weixin_39634438/article/details/112237114
 
 ### Rubric
 

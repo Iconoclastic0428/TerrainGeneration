@@ -73,10 +73,10 @@ void Renderer::Render(){
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+    glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_COLOR);
     // This is the background of the screen.
     glViewport(0, 0, m_screenWidth, m_screenHeight);
-    glClearColor( 0.01f, 0.01f, 0.01f, 1.f );
+    glClearColor( 0.529f, 0.808f, 0.92157f, 1.f );
     // Clear color buffer and Depth Buffer
     // Remember that the 'depth buffer' is our
     // z-buffer that figures out how far away items are every frame

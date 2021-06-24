@@ -82,11 +82,12 @@ void SceneNode::Update(glm::mat4 projectionMatrix, Camera* camera, float theta){
 
         // Create a 'light'
         m_shader.SetUniform3f("lightColor",1.0f,1.0f,1.0f);
-        m_shader.SetUniform3f("lightPos",
+        m_shader.SetUniform3f("lightPos", 250.0f, 250.0f, 500.0f);
+        m_shader.SetUniform1f("ambientIntensity",0.5f);
+	m_shader.SetUniform3f("viewPos",
                                camera->GetEyeXPosition() + camera->GetViewXDirection(),
                                camera->GetEyeYPosition() + camera->GetViewYDirection(),
                                camera->GetEyeZPosition() + camera->GetViewZDirection());
-        m_shader.SetUniform1f("ambientIntensity",0.5f);
 	
 		// Iterate through all of the children
 		for(int i =0; i < m_children.size(); ++i){

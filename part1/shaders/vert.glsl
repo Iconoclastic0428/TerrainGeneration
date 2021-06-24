@@ -15,6 +15,7 @@ uniform mat4 model; // Object space
 uniform mat4 view; // Object space
 uniform mat4 projection; // Object space
 uniform float theta;
+uniform sampler2D u_DiffuseMap;
 
 // Export our normal data, and read it into our frag shader
 out vec3 myNormal;
@@ -22,6 +23,7 @@ out vec3 myNormal;
 out vec3 FragPos;
 // If we have texture coordinates we can now use this as well
 out vec2 v_texCoord;
+out vec3 Position;
 
 float CalculateWavePosition(float q, float a, float w, vec3 dir, vec3 meshVert, float ph, float t){
   float qa = q * a;
@@ -47,7 +49,8 @@ vec3 CalculateNormalPosition(float q, float a, float w, vec3 dir, vec3 waveVert,
 }
 
 float water(float x, float y, float z, float theta){
-   return sin(sqrt(pow(x, 2) + pow(y, 2)) + theta) + sin(pow(x, 2) + theta) + sin(pow(z, 2) + theta);
+   return sin(sqrt(pow(x, 2) + pow(z, 2)) / 7 + theta) + sin(x / 9 + theta) + sin(z / 9 + theta) + CalculateWavePosition(61.8, 0.46, 2.0 / 61.8, vec3(0.33, 0., 0.69), position, 1.0, theta)
+   + CalculateWavePosition(51.3, 0.35, 2.0 / 51.3, vec3(0.1, 0., -0.9), position, 1.0, theta);
 }
 
 void main()
@@ -55,7 +58,7 @@ void main()
 
     gl_Position = projection * view * model * vec4(position, 1.0f);
     myNormal = normals;
-    if(position.y == 120){ 
+    if(position.y == 120 && texture(u_DiffuseMap, texCoord).r == 0){ 
     float l0 = 31.25, a0 = 0.16, s0 = 2.56;
     vec3 dir0 = vec3(0.58, 0.0, 0.42);
     float w0 = 2.0 / l0, ph0 = s0 * w0, q0 = 1.28;
@@ -93,7 +96,7 @@ void main()
     float pos7 = CalculateWavePosition(q7, a7, w7, dir7, worldVertex, ph7, theta);
 
     float pos = pos0 + pos1 + pos2 + pos3 + pos4 + pos5 + pos6 + pos7;
-    gl_Position.y += 2 * pos;
+    gl_Position.y += 4 * pos;
     gl_Position.y += water(position.x, position.y, position.z, theta);
     
 
@@ -113,6 +116,7 @@ void main()
     }
     // Transform normal into world space
     FragPos = vec3(model* vec4(position,1.0f));
+    Position = position;
 
     // Store the texture coordinates which we will output to
     // the next stage in the graphics pipeline.
