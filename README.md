@@ -1,8 +1,8 @@
 ## Edit this line: Put your link to your youtube video here (see deliverables).
 
 ## Pictures
-![plot] ./pic/pic1.png  
-![plot] ./pic/pic2.png
+![plot] (./pic/pic1.png)  
+![plot] (./pic/pic2.png)
 
 * Name and partners name(At most teams of 2 folks total)
   * Team member: Shengqi Li
