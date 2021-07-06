@@ -15,6 +15,7 @@ https://youtu.be/N6v7zOqLLkU
 
 ## Usage
 ```
+cd part1
 python3 build.py
 ./lab
 ```
