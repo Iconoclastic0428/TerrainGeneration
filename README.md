@@ -12,3 +12,9 @@ https://youtu.be/N6v7zOqLLkU
 ## External Resources
   * Perlin K. "Improving Noise." Proceedings of the 29th annual conference on Computer graphics and interactive techniques. 2002.
   * https://blog.csdn.net/weixin_39634438/article/details/112237114
+
+## Usage
+```
+python3 build.py
+./lab
+```
