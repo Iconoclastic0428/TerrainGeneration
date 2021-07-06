@@ -17,5 +17,5 @@ https://youtu.be/N6v7zOqLLkU
 ```
 cd part1
 python3 build.py
-./lab
+./lab 0.0015 2 2
 ```
